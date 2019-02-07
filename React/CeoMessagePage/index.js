@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 import {
   Paragraph,
   Icon,
@@ -7,10 +7,9 @@ import {
   MessagePreview,
   ContentWrap,
   ContentPreloader
-} from 'common';
+} from "common";
 
 export default class CeoMessagePage extends Component {
-
   componentDidMount() {
     const {
       listCeoMessage,
@@ -20,14 +19,13 @@ export default class CeoMessagePage extends Component {
     } = this.props;
 
     if (user_dep_id) {
-
       listCeoMessage({
         department_id: user_dep_id,
         user_id: user_id,
         organization_id: organizations_id,
         limit: 0,
         skip: 0
-      })
+      });
     }
   }
 
@@ -45,11 +43,8 @@ export default class CeoMessagePage extends Component {
 
     const getCeoMessage = get_ceo_message ? get_ceo_message : first_ceo_message;
 
-    if (isLoading) {
-      return (
-        <ContentPreloader />
-      )
-    } else if (list_ceo_message && !list_ceo_message.length) {
+    if (isLoading) return <ContentPreloader />;
+    else if (!list_ceo_message.length) {
       return (
         <ContentWrap>
           <BlockWrap>
@@ -60,7 +55,7 @@ export default class CeoMessagePage extends Component {
             </NoContentWrap>
           </BlockWrap>
         </ContentWrap>
-      )
+      );
     }
 
     return (
@@ -69,15 +64,16 @@ export default class CeoMessagePage extends Component {
           <Paragraph className="Head">CEO's Message</Paragraph>
           <MessagesBlockWrap>
             <MessageListWrap>
-              {list_ceo_message && list_ceo_message.map((item, index) => {
-                return (
-                  <MessageItem
-                    key={index + item.title}
-                    getMessage={getCeoMessage}
-                    item={item}
-                  />
-                )
-              })}
+              {list_ceo_message &&
+                list_ceo_message.map((item, index) => {
+                  return (
+                    <MessageItem
+                      key={index + item.title}
+                      getMessage={getCeoMessage}
+                      item={item}
+                    />
+                  );
+                })}
             </MessageListWrap>
             <MessagePreview
               isLoading={isLoadingGet}
@@ -85,11 +81,12 @@ export default class CeoMessagePage extends Component {
               addCeoMessageReadEntry={addCeoMessageReadEntry}
               user_id={user_id}
               read={read}
-              organizations_id={organizations_id} />
+              organizations_id={organizations_id}
+            />
           </MessagesBlockWrap>
         </BlockWrap>
       </ContentWrap>
-    )
+    );
   }
 }
 
@@ -98,7 +95,7 @@ const BlockWrap = styled.div`
   background-color: #fff;
   .Head {
     font-size: 1.5em;
-    color: #4F4F4F;
+    color: #4f4f4f;
     margin-bottom: 60px;
   }
 
@@ -108,7 +105,7 @@ const BlockWrap = styled.div`
   @media (max-width: 650px) {
     padding-bottom: 20%;
   }
-`
+`;
 
 const MessagesBlockWrap = styled.div`
   box-shadow: 0px 5px 5px rgba(190, 190, 190, 0.25);
@@ -121,18 +118,18 @@ const MessagesBlockWrap = styled.div`
     margin: 0;
     display: block;
   }
-`
+`;
 
 const MessageListWrap = styled.div`
   width: 30%;
-  background: #FCFCFC;
+  background: #fcfcfc;
   box-shadow: 0px 0px 5px rgba(190, 190, 190, 0.25);
   overflow-y: auto;
   @media (max-width: 768px) {
     width: 100%;
     height: 100px;
   }
-`
+`;
 
 const NoContentWrap = styled.div`
   display: flex;
@@ -142,7 +139,7 @@ const NoContentWrap = styled.div`
   margin-top: -50px;
   i {
     font-size: 5.5em;
-    color: #E0E0E0;
+    color: #e0e0e0;
     margin: 0 auto;
   }
   p {
@@ -150,4 +147,4 @@ const NoContentWrap = styled.div`
     font-size: 0.9em;
     margin-bottom: 20px;
   }
-`
+`;

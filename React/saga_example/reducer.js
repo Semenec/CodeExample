@@ -1,9 +1,9 @@
-import { LOGIN_REQUEST, LOGIN_SUCCES, LOGIN_FAIL, LOGOUT } from '../constants';
+import { LOGIN_REQUEST, LOGIN_SUCCES, LOGIN_FAIL, LOGOUT } from "../constants";
 
 let initialState = {
   isLoading: false,
   user: {}
-}
+};
 
 export default function login(state = initialState, action) {
   switch (action.type) {
@@ -12,20 +12,20 @@ export default function login(state = initialState, action) {
         ...state,
         Error: null,
         isLoading: true
-      }
+      };
     case LOGIN_SUCCES:
       return {
         ...state,
         isLoading: false,
         user: action.payload
-      }
+      };
     case LOGIN_FAIL:
       return {
         ...state,
         isLoading: false
-      }
+      };
     case LOGOUT:
-      return state = initialState;
+      return (state = initialState);
     default:
       return state;
   }
